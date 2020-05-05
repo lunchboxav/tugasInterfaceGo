@@ -2,47 +2,37 @@ package model
 
 import "fmt"
 
+const kecepatanMotor float32 = 48
+
 type Motor struct {
 	Ban       int
 	Gear      int
 	Kecepatan float32
 	Jenis     string
-	Maju
 }
 
-func (m Motor) Cepat(word float32) float32 {
-	fast := (word * 2.0) * 50.0
-	return fast
+func (m *Motor) Cepat() float32 {
+	gerakCepat := kecepatanMotor * 2
+	return gerakCepat
 }
 
-func (m Motor) Lambat(word float32) float32 {
-	slow := (word / 2.0) * 50.0
-	return slow
+func (m *Motor) Lambat() float32 {
+	gerakLambat := kecepatanMotor / 2
+	return gerakLambat
 }
 
-func (m Motor) waktu(speed float32) float32 {
-	waktuTempuh := speed * 50.0
-
+func (m *Motor) WaktuTempuh(jarak float32) float32 {
+	waktuTempuh := jarak / kecepatanMotor * 60
 	return waktuTempuh
 }
 
-func LajuMotor() {
-	var JnsMotor = [...]Motor{
-		Motor{Ban: 2, Gear: 6, Jenis: "Beat", Kecepatan: 4.0},
-		// Motor{Ban: 2, Gear: 6, Jenis: "Mio", Kecepatan: 3.0},
-		// Motor{Ban: 2, Gear: 6, Jenis: "Honda", Kecepatan: 2.5},
-		// Motor{Ban: 2, Gear: 6, Jenis: "Revo", Kecepatan: 2.50},
-		// Motor{Ban: 2, Gear: 6, Jenis: "Yamaha", Kecepatan: 3.5},
-	}
+func (m *Motor) CetakMajuCepat() {
+	pesan := m.Cepat()
+	fmt.Printf("Dengan bergerak cepat, kecepatan motor adalah %.f km/jam\n", pesan)
+}
 
-	for _, value := range JnsMotor {
-		fmt.Println("Jenis Motor = ", value.Jenis)
-		fmt.Println("Jumlah Ban Motor = ", value.Ban)
-		fmt.Println("Jumlah Gear di sepeda = ", value.Gear)
-		fmt.Println("Dalam 40 Kilometer yang waktu adalah ", value.waktu(value.Kecepatan))
-		fmt.Println("dipercepat  ", value.Cepat(value.Kecepatan), "Km")
-		fmt.Println("diperlambat", value.Lambat(value.Kecepatan), "Km")
-		Hitung(value)
-	}
-
+func (m *Motor) CetakWaktuTempuh() {
+	var jarak float32 = 20
+	waktu := m.WaktuTempuh(jarak)
+	fmt.Printf("Normalnya, dengan kecepatan %.f km/jam, jarak sejauh %.f km ditempuh motor selama %.f menit\n", kecepatanMotor, jarak, waktu)
 }

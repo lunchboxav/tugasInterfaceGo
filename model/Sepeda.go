@@ -2,44 +2,36 @@ package model
 
 import "fmt"
 
+const kecepatanSepeda float32 = 24
+
 type Sepeda struct {
-	warna string
-	ban   int
-	gigi  int
+	Warna string
+	Ban   int
+	Gigi  int
 }
 
-func (s Sepeda) Cepat(word float32) float32 {
-	fast := (word * 2) * 50
-	return fast
+func (s *Sepeda) Cepat() float32 {
+	gerakCepat := kecepatanSepeda * 2
+	return gerakCepat
 }
 
-func (s Sepeda) Lambat(word float32) float32 {
-	slow := (word / 2) * 50
-	return slow
+func (s *Sepeda) Lambat() float32 {
+	gerakLambat := kecepatanSepeda / 2
+	return gerakLambat
 }
 
-func (s Sepeda) waktuSepeda(speed float32) float32 {
-	waktuTempuh := speed * 50.0
-
+func (s *Sepeda) WaktuTempuh(jarak float32) float32 {
+	waktuTempuh := jarak / kecepatanSepeda * 60
 	return waktuTempuh
 }
 
-func LajuSepeda() {
-	var arraySepeda = [...]Sepeda{
-		Sepeda{warna: "biru", ban: 2, gigi: 5},
-		// Sepeda{warna: "hitam", ban: 2, gigi: 6},
-		// Sepeda{warna: "putih", ban: 2, gigi: 1},
-		// Sepeda{warna: "ungu", ban: 3, gigi: 1},
-		// Sepeda{warna: "merah", ban: 2, gigi: 3},
-	}
+func (s *Sepeda) CetakMajuCepat() {
+	pesan := s.Cepat()
+	fmt.Printf("Dengan bergerak cepat, kecepatan sepeda adalah %.f km/jam\n", pesan)
+}
 
-	fmt.Println(arraySepeda)
-
-	for _, value := range arraySepeda {
-		fmt.Println("Warna Sepeda = " + value.warna)
-		fmt.Println("jumlah ban   = ", value.ban)
-		fmt.Println("jumlah gigi  = ", value.gigi)
-		fmt.Println("waktu tempuh sejauh 20 km adalah ", value.waktuSepeda(20), "menit ")
-		HitungKecepatan(value)
-	}
+func (s *Sepeda) CetakWaktuTempuh() {
+	var jarak float32 = 20
+	waktu := s.WaktuTempuh(jarak)
+	fmt.Printf("Normalnya, dengan kecepatan %.f km/jam, jarak sejauh %.f km ditempuh sepeda selama %.f menit\n", kecepatanSepeda, jarak, waktu)
 }
