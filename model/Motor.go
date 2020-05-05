@@ -27,20 +27,22 @@ func (m Motor) waktu(speed float32) float32 {
 }
 
 func LajuMotor() {
-	JnsMotor := make([]Motor, 5, 5)
-
-	JnsMotor[0] = Motor{Ban: 2, Gear: 6, Jenis: "Beat", Kecepatan: 4.0}
-	JnsMotor[1] = Motor{Ban: 2, Gear: 6, Jenis: "Mio", Kecepatan: 3.0}
-	JnsMotor[2] = Motor{Ban: 2, Gear: 6, Jenis: "Honda", Kecepatan: 2.5}
-	JnsMotor[3] = Motor{Ban: 2, Gear: 6, Jenis: "Revo", Kecepatan: 2.50}
-	JnsMotor[4] = Motor{Ban: 2, Gear: 6, Jenis: "Yamaha", Kecepatan: 3.5}
+	var JnsMotor = [...]Motor{
+		Motor{Ban: 2, Gear: 6, Jenis: "Beat", Kecepatan: 4.0},
+		// Motor{Ban: 2, Gear: 6, Jenis: "Mio", Kecepatan: 3.0},
+		// Motor{Ban: 2, Gear: 6, Jenis: "Honda", Kecepatan: 2.5},
+		// Motor{Ban: 2, Gear: 6, Jenis: "Revo", Kecepatan: 2.50},
+		// Motor{Ban: 2, Gear: 6, Jenis: "Yamaha", Kecepatan: 3.5},
+	}
 
 	for _, value := range JnsMotor {
 		fmt.Println("Jenis Motor = ", value.Jenis)
 		fmt.Println("Jumlah Ban Motor = ", value.Ban)
 		fmt.Println("Jumlah Gear di sepeda = ", value.Gear)
-		fmt.Println("Dalam 50 menit Kilometer yang ditempuh adalah ", value.waktu(value.Kecepatan))
+		fmt.Println("Dalam 40 Kilometer yang waktu adalah ", value.waktu(value.Kecepatan))
 		fmt.Println("dipercepat  ", value.Cepat(value.Kecepatan), "Km")
 		fmt.Println("diperlambat", value.Lambat(value.Kecepatan), "Km")
+		Hitung(value)
 	}
+
 }
